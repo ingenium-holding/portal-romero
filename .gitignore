@@ -1,0 +1,7 @@
+# Ignorar todo por defecto
+*
+
+# Solo incluir el dashboard y archivos web
+!.gitignore
+!DASHBOARD-ROMERO.html
+!index.html
