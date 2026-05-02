@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Informe de Cierre · INTIHC-031-ROMERO · Asamblea 2026-05-02</title>
+<style>
+  :root {
+    --brand-dark:     #420049;
+    --brand-primary:  #9600C1;
+    --brand-light:    #C964FF;
+    --brand-tint:     #F0E5FF;
+    --gold:           #D4A020;
+    --gold-tint:      #FEF7E6;
+    --ink:            #1A1020;
+    --muted:          #555;
+    --border:         #D8C8E5;
+    --surface-subtle: #F4EFFA;
+    --green:          #1E7A4A;
+    --green-bg:       #E6F4ED;
+    --amber:          #C47800;
+    --amber-bg:       #FEF3DC;
+    --red:            #B83030;
+    --red-bg:         #FDEAEA;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    background: #FFF;
+    font-size: 10.5pt;
+    line-height: 1.4;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 16mm 16mm 14mm;
+    margin: 0 auto 8mm;
+    background: #FFF;
+    page-break-after: always;
+    position: relative;
+  }
+  .page:last-of-type { page-break-after: auto; }
+
+  /* HEADER */
+  .doc-header {
+    border-bottom: 3px solid var(--gold);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .doc-header .brand-block {
+    color: var(--brand-dark);
+  }
+  .doc-header .brand-tag {
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--brand-primary);
+    font-weight: 700;
+  }
+  .doc-header .brand-name {
+    font-size: 14pt;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .doc-header .doc-meta {
+    text-align: right;
+    font-size: 8.5pt;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .doc-header .doc-meta strong { color: var(--brand-dark); }
+
+  h1 {
+    font-size: 18pt;
+    color: var(--brand-dark);
+    font-weight: 700;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  h1 + .lead {
+    font-size: 10pt;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-size: 11.5pt;
+    color: var(--brand-dark);
+    font-weight: 700;
+    margin: 14px 0 8px;
+    padding: 4px 0 4px 8px;
+    border-left: 4px solid var(--brand-primary);
+    background: var(--brand-tint);
+  }
+  h3 {
+    font-size: 10pt;
+    color: var(--brand-primary);
+    font-weight: 700;
+    margin: 8px 0 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  p { margin-bottom: 6px; }
+  ul, ol { margin: 4px 0 8px 18px; }
+  li { margin-bottom: 3px; font-size: 10pt; }
+
+  /* TABLA */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6px 0 10px;
+    font-size: 9pt;
+  }
+  thead th {
+    background: var(--brand-dark);
+    color: #FFF;
+    text-align: left;
+    padding: 5px 7px;
+    font-weight: 600;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  tbody tr:nth-child(even) { background: var(--surface-subtle); }
+  tbody tr.gold { background: var(--gold-tint) !important; }
+  tbody tr.purple { background: var(--brand-tint) !important; }
+  tbody td {
+    padding: 5px 7px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  /* BADGES */
+  .b {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 7.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .b.alta  { background: var(--red-bg);   color: var(--red);   }
+  .b.med   { background: var(--amber-bg); color: var(--amber); }
+  .b.baja  { background: var(--green-bg); color: var(--green); }
+  .b.ok    { background: var(--green-bg); color: var(--green); }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--brand-tint);
+    border-left: 3px solid var(--brand-primary);
+    padding: 8px 12px;
+    font-size: 9.5pt;
+    margin: 8px 0;
+  }
+  .callout.gold { background: var(--gold-tint); border-left-color: var(--gold); }
+  .callout.amber { background: var(--amber-bg); border-left-color: var(--amber); }
+  .callout strong { color: var(--brand-primary); }
+  .callout.gold strong { color: var(--gold); }
+  .callout.amber strong { color: var(--amber); }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* KPI INLINE */
+  .kpi-row {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0 10px;
+  }
+  .kpi-box {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--brand-primary);
+    padding: 8px;
+    text-align: center;
+  }
+  .kpi-box.green { border-top-color: var(--green); }
+  .kpi-box.amber { border-top-color: var(--amber); }
+  .kpi-box.red { border-top-color: var(--red); }
+  .kpi-box.gold { border-top-color: var(--gold); }
+  .kpi-box .num {
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--brand-dark);
+    line-height: 1;
+  }
+  .kpi-box.green .num { color: var(--green); }
+  .kpi-box.amber .num { color: var(--amber); }
+  .kpi-box.red .num { color: var(--red); }
+  .kpi-box.gold .num { color: var(--gold); }
+  .kpi-box .lbl {
+    font-size: 7.5pt;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-top: 4px;
+  }
+
+  .footer-note {
+    position: absolute;
+    bottom: 8mm;
+    left: 16mm;
+    right: 16mm;
+    font-size: 7.5pt;
+    color: var(--muted);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    padding-top: 4px;
+  }
+
+  @media print {
+    body { background: #FFF; }
+    .page { margin: 0; box-shadow: none; }
+    @page { size: A4; margin: 0; }
+  }
+  @media screen {
+    body { background: #EEE; padding: 20px 0; }
+    .page { box-shadow: 0 2px 12px rgba(0,0,0,0.12); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═════════════ PÁGINA 1 ═════════════ -->
+<div class="page">
+  <div class="doc-header">
+    <div class="brand-block">
+      <div class="brand-tag">IHC · Ingenium Holding Corp</div>
+      <div class="brand-name">Conjunto Residencial Romero PH</div>
+    </div>
+    <div class="doc-meta">
+      <strong>Contrato INTIHC-031-ROMERO</strong><br>
+      Asamblea de socialización · 2026-05-02<br>
+      Reunión de socialización (entregable contractual)
+    </div>
+  </div>
+
+  <h1>Informe de cierre · Consultoría técnica parcial</h1>
+  <div class="lead">Las verificaciones documentales del contrato están completadas. La presente reunión constituye el segundo entregable contractual. Los hallazgos, recomendaciones y borradores de comunicación quedan en cabeza de la copropiedad para su materialización.</div>
+
+  <h2>1 · Alcance y entrega del contrato</h2>
+  <table>
+    <tbody>
+      <tr><td style="width:32%;"><strong>Contrato</strong></td><td>INTIHC-031-ROMERO · $10.000.000 COP · 30 días calendario</td></tr>
+      <tr><td><strong>Alcance</strong></td><td>Revisión documental + diagnóstico inicial · énfasis cerramiento perimetral</td></tr>
+      <tr><td><strong>Entregable 1 — Informe de revisión documental</strong></td><td><span class="b ok">Entregado</span></td></tr>
+      <tr><td><strong>Entregable 2 — Reunión de socialización</strong></td><td><span class="b ok">En curso (esta asamblea)</span></td></tr>
+      <tr><td><strong>Estado del contrato</strong></td><td><strong>Cerrado conforme al alcance pactado</strong></td></tr>
+      <tr><td><strong>Exclusiones contractuales</strong></td><td>Recepción integral · interventoría · consultoría jurídica · ensayos destructivos · seguimiento a correcciones</td></tr>
+    </tbody>
+  </table>
+
+  <h2>2 · Trazabilidad de la consultoría — siete hitos</h2>
+  <table>
+    <thead><tr><th style="width:14%;">Fecha</th><th>Hito</th><th style="width:32%;">Valor probatorio</th></tr></thead>
+    <tbody>
+      <tr><td>19 feb 2026 jue</td><td>Recorrido técnico inicial con profesionales IHC</td><td>Inicio de gestión</td></tr>
+      <tr><td>20 feb 2026 vie</td><td>Mesa con Amarilo · solicitud de cronograma documental</td><td>Fecha cierta de inicio</td></tr>
+      <tr><td>13 mar 2026 vie</td><td>Mesa de recepción de información (física + digital)</td><td>Fecha cierta de entrega</td></tr>
+      <tr><td>9 abr 2026 jue</td><td>Pre-informe de hallazgos a la Administración</td><td>Reporte parcial al cliente</td></tr>
+      <tr><td>24 abr 2026 vie</td><td>Visita comisión topográfica · cerramiento</td><td>Verificación física</td></tr>
+      <tr><td>25 abr 2026 sáb</td><td>Socialización con Administración y Consejo</td><td>Validación interna</td></tr>
+      <tr class="gold"><td><strong>28 abr 2026 mar</strong></td><td><strong>Reunión con Amarilo · acta firmada + compromiso de respuesta en 20 días</strong></td><td><strong>Interrumpe presunción del Art. 141 núm. 5 RPH</strong></td></tr>
+      <tr class="purple"><td><strong>2 may 2026 sáb</strong></td><td><strong>Asamblea de socialización (hoy)</strong></td><td><strong>Cierre formal del contrato</strong></td></tr>
+      <tr><td>25-29 may 2026</td><td>Vencimiento del plazo de respuesta de Amarilo (20 días desde radicación del oficio)</td><td>Hito de seguimiento posterior</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout gold">
+    <strong>Acta del 28 de abril:</strong> en la reunión con Amarilo se levantó acta firmada por las partes (práctica habitual con la constructora). En el acta consta el compromiso del constructor de responder formalmente al requerimiento dentro de 20 días calendario contados desde la radicación del oficio escrito a través de la Administración. La radicación formaliza un compromiso ya pactado, no una iniciativa nueva.
+  </div>
+
+  <h2>3 · Volumen procesado y verificaciones</h2>
+  <div class="kpi-row">
+    <div class="kpi-box"><div class="num">1.427</div><div class="lbl">Archivos clasificados</div></div>
+    <div class="kpi-box green"><div class="num">29</div><div class="lbl">Completos</div></div>
+    <div class="kpi-box amber"><div class="num">6</div><div class="lbl">Parciales</div></div>
+    <div class="kpi-box red"><div class="num">11</div><div class="lbl">Faltantes</div></div>
+    <div class="kpi-box gold"><div class="num">4+1</div><div class="lbl">Cruces analíticos</div></div>
+  </div>
+  <p style="font-size: 9.5pt;">Inventario y clasificación al 100%, cuatro cruces sistemáticos (inventario IHC vs. índice del constructor, vs. Manual del Administrador, vs. Reglamento de Propiedad Horizontal, vs. especificaciones del apto tipo) y un análisis transversal de garantías y mantenimiento. Levantamiento topográfico del cerramiento confirmado en campo (Francisco Sanabria Moreno, Lic. 01-3425 CNPT).</p>
+
+  <div class="footer-note">IHC · Ingenium Holding Corp · INTIHC-031-ROMERO · Informe de cierre · página 1 de 3</div>
+</div>
+
+<!-- ═════════════ PÁGINA 2 ═════════════ -->
+<div class="page">
+  <div class="doc-header">
+    <div class="brand-block">
+      <div class="brand-tag">IHC · Ingenium Holding Corp</div>
+      <div class="brand-name">Hallazgos críticos</div>
+    </div>
+    <div class="doc-meta">
+      Contrato INTIHC-031-ROMERO<br>
+      Asamblea · 2026-05-02
+    </div>
+  </div>
+
+  <h2>4 · Hallazgos críticos del Reglamento de Propiedad Horizontal</h2>
+  <ul>
+    <li><strong>Art. 141 núm. 5 — Presunción de entrega por uso:</strong> el uso y goce de los bienes comunes hace presumir su entrega a satisfacción. El acta del 28 de abril ya interrumpió la presunción; el oficio escrito consolida la posición.</li>
+    <li><strong>Art. 142 núm. 4 — Garantías condicionadas:</strong> sin bitácora continua de mantenimiento, la carga probatoria queda incumplida desde el primer día. Solo existen 2 registros históricos (sept-2024).</li>
+    <li><strong>Art. 142 lit. E — Entrega por acta unilateral:</strong> si la administración no concurre al recibo, Amarilo puede dejar constancia con un solo testigo.</li>
+    <li><strong>Art. 147 — Reserva de modificación unilateral:</strong> Amarilo se reserva el derecho a corregir y reformar el RPH. Cláusula amplia que requiere revisión por abogado.</li>
+    <li><strong>Art. 141 núm. 7 — Entrega por etapas:</strong> Amarilo se reserva derecho de inspección antes de la entrega de la última etapa. Pendiente verificar si la última etapa de ROMERO ya fue entregada formalmente.</li>
+    <li><strong>Discrepancias internas:</strong> bombas (RPH no esencial vs. Manual esencial) · cerramiento (Art. 31 no lo lista) · defecto de redacción con dos artículos numerados "156".</li>
+  </ul>
+
+  <h2>5 · Cerramiento perimetral · énfasis del informe</h2>
+  <table>
+    <thead><tr><th>Elemento</th><th>Plano CU-101</th><th>Levantamiento (24-abr)</th><th>Diferencia</th></tr></thead>
+    <tbody>
+      <tr><td>Longitud cerramiento</td><td>454,37 ML</td><td><strong>451,79 ML</strong></td><td>−2,58 ML (−0,57%)</td></tr>
+      <tr><td>Área predio</td><td>12.727,71 m²</td><td><strong>12.624,53 m²</strong></td><td>−103,18 m² (−0,81%)</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size: 9.5pt;">Cerramiento físicamente construido y verificado. Diseño documentado en CU-101 (planta, alzado, corte, detalle, cuadro de cantidades). Licencia Res 160-114/2023 incluye modalidad obra nueva y cerramiento. <strong>Vacío crítico:</strong> cerramiento construido sin garantía documentada del instalador (codificado GM-1 en el oficio).</p>
+
+  <h2>6 · Garantías, mantenimiento y cargas interconjunto</h2>
+  <div class="grid-2">
+    <div>
+      <h3>8 garantías entregadas</h3>
+      <p style="font-size: 9pt;">Planta eléctrica · eyector · presión · RCI · teja Eternit · impermeabilización fachadas · impermeabilización cubiertas · gas Maygas (vigente 2029-10-12).</p>
+      <h3>6 vacíos identificados</h3>
+      <p style="font-size: 9pt;"><strong>GM-1</strong> garantías cerramiento (principal vacío) · <strong>GM-2</strong> manual MTO ventanería · <strong>GM-3</strong> fichas técnicas de fabricante · <strong>GM-4</strong> bitácora histórica de mantenimiento · <strong>GM-5</strong> contratos vigentes · <strong>GM-6</strong> acta de puesta en marcha de ventanería y cubiertas.</p>
+    </div>
+    <div>
+      <h3>Cargas interconjunto</h3>
+      <p style="font-size: 9pt;"><strong>LIMA</strong> telemetría compartida (ROMERO 46% / LIMA 54%) · <strong>ENEL</strong> subestación a perpetuidad sin costo · <strong>Vanti</strong> mantenimiento trimestral obligatorio · <strong>EAAAM</strong> telemetría semestral · <strong>Hacienda Los Sauces</strong> organización social, 2 delegados.</p>
+      <h3>Parqueaderos · cuadre triple verificado</h3>
+      <p style="font-size: 9pt;">176 residentes + 26 visitantes (incluye 7 PMR) + 20 motos + 132 bicicletas = <strong>354 cupos</strong>. Bienes no esenciales (Art. 32). No admiten uso exclusivo (Art. 37).</p>
+    </div>
+  </div>
+
+  <h2>7 · Observación · Discrepancia entre el RPH y la entrega del apto tipo 56 m²</h2>
+  <div class="callout amber">
+    <strong>Encuadre:</strong> observación documental detectada en la verificación del RPH. <strong>No constituye, a la fecha del cierre del contrato, un derecho de reclamación individual.</strong> Requiere verificación cruzada con tres documentos en cabeza del comprador (promesa de compraventa, brochure de sala de ventas y acta de entrega) que la consultoría no ha tenido a la vista.
+  </div>
+  <p style="font-size: 9.5pt;">El RPH (pp. 1167-1169) protocoliza para la <strong>alcoba principal</strong> del apto tipo 56 m²: piso laminado, guardaescoba para piso laminado y muros empastados y pintados de color blanco. La <strong>alcoba 2</strong> queda protocolizada en obra gris (estándar VIS). De acuerdo con la información del contratante, Amarilo entregó la totalidad de los apartamentos sin los acabados de la alcoba principal protocolizados — muchos propietarios ejecutaron reformas a su costa.</p>
+  <p style="font-size: 9.5pt;"><strong>Jerarquía documental aplicable:</strong> entre comprador y Amarilo prevalece la promesa de compraventa (lex specialis); frente a terceros prevalece el RPH (instrumento público registrado oponible erga omnes); sobre la veracidad del instrumento, Amarilo protocolizó un estándar que no entregó. <strong>Plazo de garantía de acabados (Ley 675/2001 Art. 8):</strong> 1 año desde entrega del apartamento — vencido para casi todo el conjunto. La copropiedad como conjunto sí puede solicitar la rectificación del RPH a Amarilo y a la Notaría 71 invocando el Art. 147 RPH.</p>
+
+  <div class="footer-note">IHC · Ingenium Holding Corp · INTIHC-031-ROMERO · Informe de cierre · página 2 de 3</div>
+</div>
+
+<!-- ═════════════ PÁGINA 3 ═════════════ -->
+<div class="page">
+  <div class="doc-header">
+    <div class="brand-block">
+      <div class="brand-tag">IHC · Ingenium Holding Corp</div>
+      <div class="brand-name">Acciones · Faltantes · Cierre</div>
+    </div>
+    <div class="doc-meta">
+      Contrato INTIHC-031-ROMERO<br>
+      Asamblea · 2026-05-02
+    </div>
+  </div>
+
+  <h2>8 · Once documentos faltantes para oficio INTIHC031_COM001</h2>
+  <table>
+    <thead><tr><th style="width:5%;">#</th><th>Documento</th><th style="width:14%;">Prioridad</th><th>Observación</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Certificación RETILAP</td><td><span class="b alta">Alta</span></td><td>Carpeta vacía. Manual dice "al día" — contradicción</td></tr>
+      <tr><td>2</td><td>Informe supervisión técnica NSR-10</td><td><span class="b alta">Alta</span></td><td>Supervisor identificado: Equipos y Servicios S.A.S.</td></tr>
+      <tr><td>3</td><td>Certificado supervisión técnica NSR-10</td><td><span class="b alta">Alta</span></td><td>Documento separado del informe</td></tr>
+      <tr><td>4</td><td>Fichas técnicas de fabricante</td><td><span class="b alta">Alta</span></td><td>Carpeta vacía. Manual no las reemplaza</td></tr>
+      <tr><td>5</td><td>Garantías del cerramiento perimetral</td><td><span class="b alta">Alta</span></td><td>454,37 ML construidos sin garantía documentada</td></tr>
+      <tr><td>6</td><td>Resolución 160-457/2023</td><td><span class="b med">Media</span></td><td>Aprobación planos PH. RPH protocoliza 3 resoluciones, hay 2</td></tr>
+      <tr><td>7</td><td>Control asentamientos abr-2024</td><td><span class="b med">Media</span></td><td>Mes 9 de 13 faltante en la serie</td></tr>
+      <tr><td>8</td><td>Recibos acueducto T5–T9</td><td><span class="b med">Media</span></td><td>Solo 6 de 11 torres recibidas</td></tr>
+      <tr><td>9</td><td>Planos hidrosanitarios de diseño</td><td><span class="b med">Media</span></td><td>Solo gas en carpeta. Hidro únicamente en récord</td></tr>
+      <tr><td>10</td><td>Contratos de mantenimiento vigentes</td><td><span class="b med">Media</span></td><td>Vanti, telemetría, ascensores, RCI, planta</td></tr>
+      <tr><td>11</td><td>Manual mantenimiento ventanería</td><td><span class="b baja">Baja</span></td><td>Tiene cert + fichas pero falta manual</td></tr>
+    </tbody>
+  </table>
+
+  <h2>9 · Acciones que la asamblea debe autorizar HOY</h2>
+  <table>
+    <thead><tr><th style="width:4%;">#</th><th>Decisión</th><th style="width:25%;">Responsable</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Aprobar la radicación del oficio INTIHC031_COM001 (11 faltantes) a Amarilo a través de la Administración antes del 9 de mayo</td><td>Administración</td></tr>
+      <tr><td>2</td><td>Designar quién recibirá y custodiará la respuesta de Amarilo (vence 25-29 may)</td><td>Consejo</td></tr>
+      <tr><td>3</td><td>Autorizar inicio inmediato de bitácora de mantenimiento de bienes comunes (RPH Art. 142)</td><td>Administración</td></tr>
+      <tr><td>4</td><td>Autorizar verificación de entrega formal de la última etapa (RPH Art. 141 núm. 7)</td><td>Administración</td></tr>
+      <tr><td>5</td><td>Autorizar recopilación voluntaria de promesa, brochure y acta de entrega para análisis de discrepancia de acabados</td><td>Administración + voluntarios</td></tr>
+    </tbody>
+  </table>
+
+  <h2>10 · Pendientes en cabeza de la copropiedad post-cierre</h2>
+  <ul>
+    <li>Solicitar copia del RPH del Conjunto LIMA (reciprocidad telemetría 46/54)</li>
+    <li>Solicitar escrituras de servidumbres (ENEL, telemetría EAAAM)</li>
+    <li>Vincularse a la Organización Social Hacienda Los Sauces (Cap. XXII)</li>
+    <li>Revisión jurídica del Art. 147 (reforma unilateral) y Art. 142 lit. E (entrega unilateral)</li>
+    <li>Verificar metodología de amojonamiento del cerramiento (discrepancia de área −103 m²)</li>
+  </ul>
+
+  <h2>11 · Cierre formal del contrato</h2>
+  <div class="callout">
+    Las verificaciones documentales contratadas a Ingenium Holding Corp. bajo el contrato <strong>INTIHC-031-ROMERO</strong> están completadas. La presente reunión de socialización constituye el segundo entregable del contrato. Los hallazgos, recomendaciones y borradores de comunicación quedan en cabeza de la administración y el consejo para su materialización. Las acciones que excedan el alcance pactado (acompañamiento al radicado, visita técnica de campo extendida, asesoría jurídica especializada, seguimiento a correcciones de Amarilo, verificación apartamento por apartamento de acabados) podrán ser objeto de un nuevo contrato específico si la copropiedad así lo decide.
+  </div>
+
+  <table style="margin-top: 12px;">
+    <tbody>
+      <tr><td style="width:30%;"><strong>Dashboard de consulta</strong></td><td>https://ingenium-holding.github.io/portal-romero/</td></tr>
+      <tr><td><strong>Contacto IHC</strong></td><td>webmaster@ingeniumholding.co</td></tr>
+      <tr><td><strong>Documentación entregada</strong></td><td>Estructura IHC en 3 carpetas matriz: 01-Planeación · 02-Bienes Esenciales · 03-Bienes No Esenciales</td></tr>
+      <tr><td><strong>Borrador de oficio</strong></td><td>INTIHC031_COM001_Faltantes_constructor_2026-04-28.docx (entregado)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer-note">IHC · Ingenium Holding Corp · INTIHC-031-ROMERO · Informe de cierre · página 3 de 3</div>
+</div>
+
+</body>
+</html>
